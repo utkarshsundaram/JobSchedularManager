@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <data>
+        <variable
+            name="jobSchedular"
+            type="jobschedularmanager.jobschedularmanager.viewModel.JobSchedularViewModel"/>
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/schedule_job"
+        android:onClick="@{jobSchedular.onScheduleJob()}"
+        android:layout_height="wrap_content"
+         />
+
+</RelativeLayout>
+</layout>
