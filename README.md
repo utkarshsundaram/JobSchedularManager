@@ -25,7 +25,7 @@ This is what enables the system to perform your work for you, regardless of whet
 
  It is called by the system if the job is cancelled before being finished. This generally happens when your job conditions are no longer being met, such as when the device has been unplugged or if WiFi is no longer available. So use this method for any safety checks and clean up you may need to do in response to a half-finished job.
  
-# Add your service in android manifest with the permission  android:permission="android.permission.BIND_JOB_SERVICE"defined in it
+Add your service in android manifest with the permission  android:permission="android.permission.BIND_JOB_SERVICE"defined in it
 
 # Method for defining JobInfo and parameters to be included 
 
@@ -42,7 +42,6 @@ You can specify your own back-off/retry policy. This defaults to an exponential 
 If your job cannot start for at least X amount of time, or cannot be delayed past a specific time, you can specify those values here. Even if all conditions have not been met, your job will be run by the deadline 
 # Periodic
 If you have work that needs to be done regularly, you can set up a periodic job.
-# Note 
 The peroidic job will start 15 min *(the time that you have provided) in the method
 
 # Persistent
