@@ -9,5 +9,5 @@ import static jobschedularmanager.jobschedularmanager.network.ApiClient.BASE_URL
 
 public final class NetworkApi
 {
-  public static final String DEMO=BASE_URL+"/DashboardDetails.svc/GetDashBoardDetail/?UserId=4892";
+  public static final String DEMO=BASE_URL+"api_key=5a1db2339bebc3a3464202a1a7585af2";
 }

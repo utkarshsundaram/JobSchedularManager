@@ -17,7 +17,7 @@ import static jobschedularmanager.jobschedularmanager.network.NetworkConstant.NE
 
 public class ApiClient {
 
-    public static final String BASE_URL = "http://169.38.100.202:801";
+    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/550?";
     private static Retrofit retrofit = null;
 
 

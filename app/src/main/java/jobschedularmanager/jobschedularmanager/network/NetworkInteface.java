@@ -1,10 +1,9 @@
 package jobschedularmanager.jobschedularmanager.network;
 import java.util.Map;
-import jobschedularmanager.jobschedularmanager.model.DashboardSummary;
+import jobschedularmanager.jobschedularmanager.model.MovieResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
-import retrofit2.http.Url;
 
 import static jobschedularmanager.jobschedularmanager.network.NetworkApi.DEMO;
 
@@ -15,6 +14,6 @@ import static jobschedularmanager.jobschedularmanager.network.NetworkApi.DEMO;
 public interface NetworkInteface
 {
     @GET(DEMO)
-    Call<DashboardSummary> checkForServiceResponse(@HeaderMap Map<String,String> getHeader);
+    Call<MovieResponse> checkForServiceResponse();
 
 }

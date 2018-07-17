@@ -1,43 +1,42 @@
 package jobschedularmanager.jobschedularmanager.service;
 
-import android.annotation.SuppressLint;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.content.Context;
-import android.os.AsyncTask;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
 
-import jobschedularmanager.jobschedularmanager.model.DashboardSummary;
+import jobschedularmanager.jobschedularmanager.model.MovieResponse;
 import jobschedularmanager.jobschedularmanager.network.ApiClient;
 import jobschedularmanager.jobschedularmanager.network.NetworkInteface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static jobschedularmanager.jobschedularmanager.application.JobSchedularApplication.getCommonHeaders;
-
 /**
- * Created by user on 12/7/18.
+ *
+ * Created by UtkarshSundaram on 12/7/18.
  */
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class APICallService extends JobService {
+public class APICallService extends JobService
+{
+    public static final String TAG="APICallService";
     @Override
     public boolean onStartJob(final JobParameters params)
     {
-        //new JobTask(this,this).execute(params);
+        Log.d(TAG,"job started");
         NetworkInteface apiService =
                 ApiClient.getClient().create(NetworkInteface.class);
-        Call<DashboardSummary>call=apiService.checkForServiceResponse(getCommonHeaders());
-        call.enqueue(new Callback<DashboardSummary>() {
+        Call<MovieResponse>call=apiService.checkForServiceResponse();
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<DashboardSummary> call, final Response<DashboardSummary> response) {
+            public void onResponse(Call<MovieResponse> call, final Response<MovieResponse> response) {
+                Log.d(TAG,"api response success");
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
 
@@ -47,10 +46,10 @@ public class APICallService extends JobService {
                     }
                 });
                 APICallService.this.jobFinished(params, true);
-                // Toast.makeText(mContext,response.message(),Toast.LENGTH_LONG).show();
             }
             @Override
-            public void onFailure(Call<DashboardSummary> call, final Throwable t) {
+            public void onFailure(Call<MovieResponse> call, final Throwable t) {
+                Log.d(TAG,"api response failure");
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
 
@@ -60,52 +59,17 @@ public class APICallService extends JobService {
                     }
                 });
                 APICallService.this.jobFinished(params, true);
-                //Toast.makeText(APICallService.this,""+t.toString(),Toast.LENGTH_LONG).show();
             }
         });
         return false;
     }
 
     @Override
-    public boolean onStopJob(JobParameters params) {
+    public boolean onStopJob(JobParameters params)
+    {
+        Log.d(TAG,"job stopped");
         return true;
     }
-   /* private static class JobTask extends AsyncTask<JobParameters, Void, JobParameters> {
-        @SuppressLint("StaticFieldLeak")
-        private final JobService jobService;
-        @SuppressLint("StaticFieldLeak")
-        private Context mContext;
-        public JobTask(JobService jobService,Context mContext) {
-            this.jobService = jobService;
-            this.mContext=mContext;
-
-        }
-
-        @Override
-        protected JobParameters doInBackground(JobParameters... params)
-        {
-            NetworkInteface apiService =
-                    ApiClient.getClient().create(NetworkInteface.class);
-            Call<DashboardSummary>call=apiService.checkForServiceResponse(getCommonHeaders());
-            call.enqueue(new Callback<DashboardSummary>() {
-                @Override
-                public void onResponse(Call<DashboardSummary> call, Response<DashboardSummary> response) {
-                    Toast.makeText(mContext,response.message(),Toast.LENGTH_LONG).show();
-                }
-                @Override
-                public void onFailure(Call<DashboardSummary> call, Throwable t) {
-                    Toast.makeText(mContext,""+t.toString(),Toast.LENGTH_LONG).show();
-                }
-            });
-            return params[0];
-        }
-
-        @Override
-        protected void onPostExecute(JobParameters jobParameters)
-        {
-            Toast.makeText(mContext,"the job is finished",Toast.LENGTH_LONG).show();
-            jobService.jobFinished(jobParameters, true);
-        }*/
     }
 
 

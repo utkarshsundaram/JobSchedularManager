@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class JobSchedularApplication extends Application
 {
-    public static Map<String, String> getCommonHeaders() {
+  /*  public static Map<String, String> getCommonHeaders() {
         Map<String, String> map = new HashMap<>();
         map.put("password","dupont@123" );
         map.put("Username", "dupont@kelltontech.com");
         return map;
-    }
+    }*/
 }
