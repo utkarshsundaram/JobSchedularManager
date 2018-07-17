@@ -16,12 +16,12 @@ JobScheduler even considers memory pressure, which is a clear overall win for de
 # How to Use it
 The work you are wanting to schedule should be defined in a JobService. Your JobService is actually going to be a Service that extends the JobService class. 
 This is what enables the system to perform your work for you, regardless of whether your app is active
-#Methods of JobService
- # 1-onStartJob()-
+# Methods of JobService
+# onStartJob()-
  
  If your task is short and simple, feel free to implement the logic directly in onStartJob() and return false when you are finished, to let the system know that all work has been completed
 
-# 2-onStopJob()-
+# onStopJob()-
 
  It is called by the system if the job is cancelled before being finished. This generally happens when your job conditions are no longer being met, such as when the device has been unplugged or if WiFi is no longer available. So use this method for any safety checks and clean up you may need to do in response to a half-finished job.
  
